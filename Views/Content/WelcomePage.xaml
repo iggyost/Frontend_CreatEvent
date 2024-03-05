@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Frontend_CreatEvent.Views.Content.WelcomePage"
+             Title="WelcomePage"
+             Padding="-5"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+        </Grid.GestureRecognizers>
+        <Image Source="back_image_noblur.png"
+               Aspect="AspectFill"></Image>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.35*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 VerticalOptions="End"
+                                 Spacing="-18">
+                <Label FontFamily="IMFellFrenchCanonSC-Regular"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="48"
+                       Text="CreatEvent">
+                    <Label.Shadow>
+                        <Shadow Radius="2"
+                                Offset="-4,4"
+                                Opacity="0.4"></Shadow>
+                    </Label.Shadow>
+                </Label>
+                <Label FontFamily="IMFellFrenchCanon-Regular"
+                       TextColor="Black"
+                       FontSize="40"
+                       HorizontalOptions="Center"
+                       Text="Your">
+                    <Label.Shadow>
+                        <Shadow Radius="2"
+                                Offset="-4,4"
+                                Opacity="0.4"></Shadow>
+                    </Label.Shadow>
+                </Label>
+            </VerticalStackLayout>
+            <Image Source="logo.png"
+                   Grid.Row="1"
+                   WidthRequest="144"
+                   Margin="0,0,0,240"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"></Image>
+        </Grid>
+    </Grid>
+</ContentPage>

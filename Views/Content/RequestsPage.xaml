@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Frontend_CreatEvent.Views.Content.RequestsPage"
+             Title="RequestsPage"
+             Shell.NavBarIsVisible="False"
+             Loaded="ContentPage_Loaded">
+    <Grid>
+        <Image Source="back_shell_image_blur.png"
+               Aspect="AspectFill"></Image>
+        <ActivityIndicator x:Name="activInd"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Color="White"
+                           WidthRequest="32"
+                           HeightRequest="32"></ActivityIndicator>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"></RowDefinition>
+                <RowDefinition Height="16"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label FontSize="30"
+                   Text="Мои запросы"
+                   Margin="16"
+                   TextColor="White"
+                   FontFamily="GolosText-Medium"></Label>
+            <RefreshView Refreshing="refRequest_Refreshing"
+                     x:Name="refRequest"
+                         Grid.Row="2">
+                <CollectionView x:Name="requestsCv">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"></LinearItemsLayout>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView VerticalOptions="Start">
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItem Text="Удалить"
+                                                   BackgroundColor="#7FFFB6C1"
+                                                   AutomationId="{Binding RequestId}"
+                                                   Invoked="SwipeItem_Invoked"></SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <!--Шаблон-->
+                                <Border HeightRequest="86"
+                                            BackgroundColor="#40000000"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 10"
+                                            Margin="8">
+                                    <Grid Margin="8">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="0.5*"></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <HorizontalStackLayout Spacing="4">
+                                            <Label FontSize="21"
+                                                       Text="Запрос #"
+                                                       TextColor="LightGray"></Label>
+                                            <Label FontSize="21"
+                                                       TextColor="White"
+                                                       Text="{Binding RequestId}"></Label>
+                                            <HorizontalStackLayout Spacing="8"
+                                                                       Margin="16,0,0,0">
+                                                <Label Text="{Binding Date, StringFormat='{}{0:dd.MM.yyy}'}"
+                                                           FontSize="18"
+                                                           VerticalOptions="Center"
+                                                           TextColor="LightGray"></Label>
+                                                <Label Text="{Binding Time}"
+                                                           FontSize="18"
+                                                           VerticalOptions="Center"
+                                                           TextColor="LightGray"></Label>
+                                            </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Grid.Row="2"
+                                                                   VerticalOptions="Center"
+                                                                   HorizontalOptions="Start"
+                                                                   Spacing="8">
+                                            <Label FontSize="21"
+                                                       Text="Статус:"
+                                                       TextColor="LightGray"></Label>
+                                            <Label FontSize="21"
+                                                       Text="{Binding Name}"
+                                                       TextColor="White"></Label>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Grid>
+    </Grid>
+</ContentPage>

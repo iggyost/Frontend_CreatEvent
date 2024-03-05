@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Frontend_CreatEvent.Views.Content.EventOrderPage"
+             Title="EventOrderPage"
+             Padding="-3"
+             NavigationPage.HasNavigationBar="False"
+             Loaded="ContentPage_Loaded">
+    <Grid>
+        <Image x:Name="eventImage"
+               Aspect="AspectFill"></Image>
+        <Border Background="Black"
+                Opacity="0.55"></Border>
+        <ActivityIndicator VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           x:Name="activityInd"
+                           Color="White"></ActivityIndicator>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"></RowDefinition>
+                <RowDefinition Height="0.6*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Навигация назад-->
+            <HorizontalStackLayout Spacing="16"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start">
+                <ImageButton HeightRequest="40"
+                             WidthRequest="40"
+                             VerticalOptions="Center"
+                             Source="arrow_left.png"
+                             Clicked="ImageButton_Clicked"></ImageButton>
+                <Label x:Name="eventNameLbl"
+                       FontSize="28"
+                       FontFamily="GolosText-Medium"
+                       TextColor="White"
+                       VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+            <!--Корзина блюд-->
+                        <Border Grid.Row="1"
+                                StrokeShape="RoundRectangle 20"
+                                Margin="0,8"
+                                StrokeThickness="0"
+                                BackgroundColor="#40000000">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="0.3*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+            <CollectionView x:Name="cartDishesCv"
+                            Loaded="cartDishesCv_Loaded">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"></LinearItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Удалить"
+                                                       BackgroundColor="#7FFFB6C1"
+                                                       Invoked="OnDeleteSwipeItemInvoked"
+                                                       AutomationId="{Binding Id}"></SwipeItem>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Border Margin="8"
+                                            HeightRequest="72"
+                                            StrokeShape="RoundRectangle 10"
+                                            BackgroundColor="#40000000"
+                                            StrokeThickness="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="72"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding CoverPhoto}"
+                                                   Aspect="AspectFill"
+                                                   Margin="8"></Image>
+                                            <Grid Grid.Column="1"
+                                                  Margin="8">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition></RowDefinition>
+                                                    <RowDefinition></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Label Text="{Binding Name}"
+                                                       FontSize="18"
+                                                       LineBreakMode="TailTruncation"
+                                                       TextColor="LightGray"></Label>
+                                                <Grid Grid.Row="1"
+                                                      HorizontalOptions="Start">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="24"></ColumnDefinition>
+                                                        <ColumnDefinition Width="24"></ColumnDefinition>
+                                                        <ColumnDefinition Width="24"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <ImageButton Source="minus_icon.png"
+                                                                 AutomationId="{Binding Id}"
+                                                                 WidthRequest="16"
+                                                                 HeightRequest="16"
+                                                                 VerticalOptions="Center"
+                                                                 x:Name="minusBtn"
+                                                                 Clicked="minusBtn_Clicked"></ImageButton>
+                                                    <Label TextColor="LightGray"
+                                                           FontSize="16"
+                                                           FontFamily="GolosText-Medium"
+                                                           VerticalOptions="Center"
+                                                           HorizontalOptions="Center"
+                                                           Grid.Column="1"
+                                                           Text="{Binding Count}"></Label>
+                                                    <ImageButton Source="plus_icon.png"
+                                                                 AutomationId="{Binding Id}"
+                                                                 WidthRequest="16"
+                                                                 HeightRequest="16"
+                                                                 VerticalOptions="Center"
+                                                                 Grid.Column="2"
+                                                                 x:Name="plusBtn"
+                                                                 Clicked="plusBtn_Clicked"></ImageButton>
+                                                </Grid>
+                                            </Grid>
+                                            <Label TextColor="LightGray"
+                                                   FontSize="21"
+                                                   Grid.Column="2"
+                                                   VerticalOptions="Center"
+                                                   Margin="0,0,8,0"
+                                                   HorizontalOptions="End"
+                                                   Text="{Binding TotalCost, StringFormat='{0:F0} ₽'}"></Label>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
+                            </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <VerticalStackLayout VerticalOptions="Start"
+                                                         Margin="16,0">
+                                        <Label Text="Итоговая стоимость:"
+                                               TextColor="Gray"
+                                               FontSize="16"></Label>
+                            <HorizontalStackLayout>
+                                <Label x:Name="allCostLbl"
+                                               TextColor="#F5F5F5"
+                                               FontSize="20"></Label>
+                                <Label FontSize="20"
+                                       Text="₽"
+                                       TextColor="#F5F5F5"
+                                       Margin="4,0,0,0"></Label>
+                            </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                    <!--<Button Grid.Column="1"
+                                            Text="Оплатить"
+                                            FontSize="18"
+                                            BackgroundColor="#40000000"
+                                            x:Name="payBtn"></Button>-->
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+            <Grid Grid.Row="2">
+                <VerticalStackLayout>
+                    <!--Категории-->
+                    <ScrollView Orientation="Horizontal"
+                                HorizontalScrollBarVisibility="Always">
+                        <CollectionView x:Name="categoriesCv"
+                                        Loaded="categoriesCv_Loaded">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"
+                                                   ItemSpacing="4"></LinearItemsLayout>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <RadioButton Style="{StaticResource categories_style}"
+                                                 Content="{Binding Name}"
+                                                 AutomationId="{Binding CategoryId}"
+                                                 CheckedChanged="RadioButton_CheckedChanged"
+                                                 Margin="0,0,0,6"></RadioButton>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                    <ScrollView Orientation="Vertical"
+                                Margin="0,4"
+                                VerticalOptions="Start">
+                        <VerticalStackLayout VerticalOptions="Start">
+                            <!--Название категории с меню-->
+                            <!--на диплом доработать режим отображения плиток*-->
+                            <Grid Margin="8">
+                                <Label x:Name="categoryNameLbl"
+                                       FontSize="26"
+                                       TextColor="White"
+                                       FontFamily="GolosText-Medium"></Label>
+                            </Grid>
+                            <!--Меню-->
+                            <ScrollView Orientation="Vertical"
+                                        HeightRequest="272">
+                                
+                            <CollectionView x:Name="menuCv">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical"
+                                                       ItemSpacing="4"></LinearItemsLayout>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border HeightRequest="96"
+                                                StrokeShape="RoundRectangle 10"
+                                                Background="#40000000"
+                                                Margin="0,0,6,0"
+                                                StrokeThickness="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="96"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Margin="6"
+                                                        StrokeShape="RoundRectangle 8"
+                                                        StrokeThickness="0">
+                                                    <Image Source="{Binding CoverPhoto}"
+                                                           Aspect="AspectFill"></Image>
+                                                </Border>
+                                                <Grid Grid.Column="1"
+                                                      Margin="6">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition></RowDefinition>
+                                                        <RowDefinition Height="0.5*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label FontSize="18"
+                                                           TextColor="LightGray"
+                                                           HeightRequest="56"
+                                                           MaxLines="2"
+                                                           Margin="0,0,4,0"
+                                                           LineBreakMode="WordWrap"
+                                                           Text="{Binding Name}">
+                                                    </Label>
+                                                    <Label Grid.Row="1"
+                                                           FontSize="18"
+                                                           TextColor="LightGray"
+                                                           Text="{Binding Cost, StringFormat='{0:F0} ₽'}"></Label>
+                                                    <Button Grid.Column="1"
+                                                            Grid.RowSpan="2"
+                                                            Background="#40000000"
+                                                            FontSize="54"
+                                                            Text="+"
+                                                            x:Name="addDishBtn"
+                                                            Clicked="addDishBtn_Clicked"
+                                                            AutomationId="{Binding DishId}"></Button>
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            </ScrollView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!--Кнопка заказа-->
+            <Button VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    Grid.Row="2"
+                    Margin="16"
+                    WidthRequest="144"
+                    BackgroundColor="#7F000000"
+                    FontSize="20"
+                    FontFamily="GolosText-Medium"
+                    Text="Принять"
+                    x:Name="doOrderBtn"
+                    Clicked="doOrderBtn_Clicked"></Button>
+        </Grid>
+    </Grid>
+</ContentPage>

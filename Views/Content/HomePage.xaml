@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Frontend_CreatEvent.Views.Content.HomePage"
+             Title="HomePage"
+             Shell.NavBarIsVisible="False"
+             Loaded="ContentPage_Loaded">
+    <Grid>
+        <Image Source="back_shell_image_blur.png"
+               Aspect="AspectFill"></Image>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <VerticalStackLayout Grid.Row="1"
+                                 Spacing="12">
+                <Label Text="Мероприятия"
+                       TextColor="White"
+                       FontSize="34"
+                       FontFamily="GolosText-Medium"></Label>
+                <Label Text="Выберите наиболее подходящий банкет своему мероприятию"
+                       FontSize="20"
+                       TextColor="LightGray"></Label>
+                <RefreshView x:Name="refreshPage"
+                 Refreshing="refreshPage_Refreshing">
+                    <CarouselView x:Name="eventsCv"
+                                  Loaded="eventsCv_Loaded"
+                                  HeightRequest="256"
+                                  PeekAreaInsets="24"
+                                  IndicatorView="carouselIv">
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F5F5F5"
+                                        HeightRequest="256"
+                                        Margin="4,0,4,0"
+                                        Padding="-4"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 20"
+                                        AutomationId="{Binding EventId}">
+                                    <Border.Shadow>
+                                        <Shadow Radius="4"
+                                                Offset="-4,4"
+                                                Opacity="0.4">
+                                        </Shadow>
+                                    </Border.Shadow>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                                    </Border.GestureRecognizers>
+                                    <Grid>
+                                        <Image Source="{Binding CoverPhoto}"
+                                               Aspect="AspectFill"></Image>
+                                        <Border Background="Black"
+                                                Opacity="0.55">
+                                        </Border>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <VerticalStackLayout Grid.Row="1"
+                                                                 Margin="16"
+                                                                 Spacing="16">
+                                                <Label Text="{Binding Name}"
+                                                       TextColor="LightGray"
+                                                       FontSize="22"
+                                                       FontFamily="GolosText-Medium"></Label>
+                                                <Label Text="{Binding Description}"
+                                                       TextColor="White"
+                                                       FontSize="14"
+                                                       FontFamily="GolosText-Medium"></Label>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </RefreshView>
+                <IndicatorView x:Name="carouselIv"
+                               HorizontalOptions="Center"
+                               IndicatorColor="DarkGray"
+                               IndicatorSize="10"
+                               SelectedIndicatorColor="#F5F5F5">
+                    </IndicatorView>
+
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

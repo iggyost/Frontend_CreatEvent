@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Frontend_CreatEvent.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Frontend_CreatEvent.Views.Content"
+    Shell.FlyoutBehavior="Disabled">
+
+    <Shell.Items>
+        <TabBar>
+            <Tab Icon="home_icon.png"
+                 Title="Главная">
+                <ShellContent ContentTemplate="{DataTemplate local:HomePage}"
+                              Route="Home"></ShellContent>
+            </Tab>
+            <Tab Icon="requests_icon.png"
+                 Title="Запросы">
+                <ShellContent ContentTemplate="{DataTemplate local:RequestsPage}"
+                              Route="Requests"></ShellContent>
+            </Tab>
+            <Tab Icon="profile_icon.png"
+                 Title="Профиль">
+                <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"
+                              Route="Profile"></ShellContent>
+            </Tab>
+        </TabBar>
+    </Shell.Items>
+
+</Shell>

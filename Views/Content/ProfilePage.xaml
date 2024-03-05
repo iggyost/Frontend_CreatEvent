@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Frontend_CreatEvent.Views.Content.ProfilePage"
+             Title="ProfilePage"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <Image Source="back_shell_image_blur.png"
+               Aspect="AspectFill"></Image>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="128"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <StackLayout Margin="16,32,0,0"
+                             HorizontalOptions="Start">
+                    <StackLayout HorizontalOptions="Center"
+                             Spacing="16"
+                             Orientation="Horizontal">
+                        <Label FontSize="32"
+                               TextColor="White"
+                               x:Name="userNameLbl"></Label>
+                        <ImageButton x:Name="editNameBtn"
+                                     Source="edit_icon.png"
+                                     Clicked="editNameBtn_Clicked"
+                                     Aspect="AspectFill"
+                                     VerticalOptions="Center"
+                                     HeightRequest="28"
+                                     WidthRequest="28"></ImageButton>
+                    </StackLayout>
+                    <Label FontSize="20"
+                       TextColor="Gray"
+                       HorizontalOptions="Start">Пользователь</Label>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="2">
+                <VerticalStackLayout Margin="16"
+                                     Spacing="16">
+                    <Label FontSize="24"
+                           TextColor="White">Личные данные</Label>
+                    <HorizontalStackLayout Spacing="16">
+                        <VerticalStackLayout Spacing="10">
+                            <Label TextColor="LightGray"
+                                   FontSize="18">Email</Label>
+                            <Label TextColor="LightGray"
+                                   FontSize="18">Номер телефона</Label>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="10">
+                            <Label TextColor="White"
+                                   x:Name="userEmailLbl"
+                                   FontSize="18"></Label>
+                            <Label TextColor="White"
+                                   x:Name="userPhoneLbl"
+                                   FontSize="18"></Label>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                <Button VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    Text="Выйти из аккаунта"
+                    Margin="16"
+                    x:Name="leaveBtn"
+                    Clicked="leaveBtn_Clicked"
+                    BackgroundColor="DarkRed"></Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
